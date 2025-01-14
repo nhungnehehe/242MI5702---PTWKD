@@ -1,0 +1,147 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Exercise 49</title>
+    <style>
+        body{background-color: rgb(178, 240, 250);}
+        h1{
+            color: red;
+            text-align: center;
+        }
+        hr{
+            border: 1px solid brown;
+        }
+        form p{
+            font-weight: bolder;
+        }
+        .form-section {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .form-section label {
+            flex: 0 0 50%; 
+            margin-bottom: 5px;
+        }
+        .btn-group {
+      margin-top: 10px;
+    }
+        .btn-group button {
+        background-color: transparent;
+        border: none;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        cursor: pointer;
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+        }
+        .btn-group .search {
+        background-image: url('images/Search.gif');
+        }
+        .btn-group .help {
+        background-image: url('images/Help.gif');
+        }
+        .btn-group .cancel {
+        background-image: url('images/Cancel.gif');
+        }
+        .result-table {
+        margin-top: 20px;
+        display: none;
+        border-collapse: collapse;
+        width: 100%;
+        }
+        .result-table th, .result-table td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+        }
+        .result-table th {
+        background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="color: red;">Online Classifieds Search Form</h1>
+    <hr/>
+    <form id="searchForm">
+        <p>1) Search for a classified in the following sections:</p>
+            <div class="form-section">
+                <label><input type="radio" name="section" value="Employment" required> Employment</label>
+                <label><input type="radio" name="section" value="Personal"> Personal</label>
+                <label><input type="radio" name="section" value="For Sale" checked="checked"> For Sale</label>
+                <label><input type="radio" name="section" value="Housing"> Housing</label>
+                <label><input type="radio" name="section" value="Miscellaneous"> Miscellaneous</label>
+                <label><input type="radio" name="section" value="All of the above"> All of the above</label>
+            </div>
+        <p>2) Search the following publications:</p>
+            <div class="form-section">
+                <label><input type="checkbox" name="publications" value="Midwest Times"> Midwest Times</label>
+                <label><input type="checkbox" name="publications" value="Modern News"> Modern News</label>
+                <label><input type="checkbox" name="publications" value="Employment Today"> Employment Today</label>
+                <label><input type="checkbox" name="publications" value="Great Lakes Classifieds"> Great Lakes Classifieds</label>
+                <label><input type="checkbox" name="publications" value="Middleton Daily"> Middleton Daily</label>
+                <label><input type="checkbox" name="publications" value="Cashtown Daily News"> Cashtown Daily News</label>
+            </div>
+        <p>3) From <input type="date" name="from_date" placeholder="mm/dd/yy" required> to <input type="date" name="to_date" placeholder="mm/dd/yy" required></p>
+        <p>4) Enter a few keywords to describe the classified.</p>
+            <input type="text" name="keywords" style="width: 100%;"><br>
+         
+        <p>5) Click one of the options below:</p>
+        <div class="btn-group">
+            <button type="button" class="search" title="Search" onclick="showResults();"></button>
+            <button type="button" class="help" title="Help" onclick="openHelp();"></button>
+            <button type="reset" class="cancel" title="Cancel"></button>
+        </div>
+    </form>
+    <table class="result-table" id="resultTable">
+        <thead>
+          <tr>
+            <th>Section</th>
+            <th>Publications</th>
+            <th>Date Range</th>
+            <th>Keywords</th>
+            <th>Result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td id="resultSection"></td>
+            <td id="resultPublications"></td>
+            <td id="resultDateRange"></td>
+            <td id="resultKeywords"></td>
+            <td id="resultStatus">Not Found</td>
+          </tr>
+        </tbody>
+      </table>
+    
+      <script>
+        function showResults() {
+          const form = document.getElementById('searchForm');
+          const section = form.section.value;
+          const publications = Array.from(form.querySelectorAll('input[name="publications"]:checked')).map(cb => cb.value).join(', ');
+          const fromDate = form.from_date.value;
+          const toDate = form.to_date.value;
+          const keywords = form.keywords.value;
+    
+          // Hiển thị dữ liệu trong bảng
+          document.getElementById('resultSection').textContent = section;
+          document.getElementById('resultPublications').textContent = publications || 'None';
+          document.getElementById('resultDateRange').textContent = `${fromDate} - ${toDate}`;
+          document.getElementById('resultKeywords').textContent = keywords || 'None';
+    
+          // Kết quả giả lập
+          const hasResults = false; // Giả lập không có dữ liệu
+          document.getElementById('resultStatus').textContent = hasResults ? 'Found' : 'Not Found';
+    
+          // Hiển thị bảng
+          document.getElementById('resultTable').style.display = 'table';
+        }
+    
+        function openHelp() {
+          window.location.href = "help.html";
+        }
+      </script>
+    
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exercise</title>
+    <style>
+        body {
+            background-color: #9ff6df;
+        }
+
+        .container {
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .row .spacer { margin-right: 20px; }
+        .header {
+            text-align: center;
+            font-family: Georgia, serif;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .header img {
+            width: 200px;
+            display: block;
+            margin: 0 auto 10px auto;
+        }
+
+        label {
+            margin-right: 10px;
+        }
+
+        input[type="text"], textarea, select {
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .row label {
+            flex: 0 0 150px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        .radio {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .radio input {
+            margin-left: 5px;
+            margin-right: 10px;
+        }
+
+        .buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .buttons input[type="submit"], .buttons input[type="reset"] {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        .buttons input[type="reset"] {
+            background-color: #f44336;
+        }
+
+        .buttons input:hover {
+            opacity: 0.9;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="images/DeLong.jpg" alt="DeLong Enterprises">
+            Travel Expense Report
+        </div>
+        <form method="Get">
+            <div class="row">
+                <label>1) First Name:</label> <input type="text" name="firstname" class="spacer">
+                <label>Last Name:</label> <input type="text" name="lastname">
+            </div>
+
+            <div class="row">
+                <label>2) Social Security Number:</label> <input type="text" name="ssn">
+            </div>
+
+            <div class="row">
+                <label>3) Department:</label> 
+                <select name="department">
+                    <option>Accounting</option>
+                    <option>...</option>
+                    <option>....</option>
+                    <option>..</option>
+                </select>
+            </div>
+
+            <div class="row">
+                <label>4) Purpose of Trip:</label> 
+                <textarea name="purpose" rows="3" style="width: 100%;"></textarea>
+            </div>
+
+            <label>5) Itemize your travel expenses:</label>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" name="date1" placeholder="mm/dd/yy"></td>
+                        <td><input type="text" name="desc1"></td>
+                        <td>
+                            <select name="category1">
+                                <option>Meal</option>
+                                <option>...</option>
+                                <option>....</option>
+                                <option>.....</option>
+                            </select>
+                        </td>
+                        <td><input type="text" name="amount1"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="date2" placeholder="mm/dd/yy"></td>
+                        <td><input type="text" name="desc2"></td>
+                        <td>
+                            <select name="category2">
+                                <option>Meal</option>
+                                <option>...</option>
+                                <option>....</option>
+                                <option>.....</option>
+                            </select>
+                        </td>
+                        <td><input type="text" name="amount2"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="date3" placeholder="mm/dd/yy"></td>
+                        <td><input type="text" name="desc3"></td>
+                        <td>
+                            <select name="category3">
+                                <option>Meal</option>
+                                <option>...</option>
+                                <option>....</option>
+                                <option>.....</option>
+                            </select>
+                        </td>
+                        <td><input type="text" name="amount3"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="date4" placeholder="mm/dd/yy"></td>
+                        <td><input type="text" name="desc4"></td>
+                        <td>
+                            <select name="category4">
+                                <option>Meal</option>
+                                <option>...</option>
+                                <option>....</option>
+                                <option>.....</option>
+                            </select>
+                        </td>
+                        <td><input type="text" name="amount4"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="radio">
+                <label>6) Have you submitted your receipts?</label>
+                <input type="radio" name="receipts" value="yes"> Yes
+                <input type="radio" name="receipts" value="no"> No
+            </div>
+
+            <input type="submit" value="CSubmit travel expenses"/>
+            <input type="reset" value="Click to cancel"/>
+        </form>
+
+        <div class="footer">Questions? Contact Debbie Larson in Accounting (ext. 2150).</div>
+    </div>
+</body>
+</html>
