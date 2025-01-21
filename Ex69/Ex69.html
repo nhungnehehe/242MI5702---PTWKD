@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Employee List</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: lightblue;
+        }
+        select {
+            margin: 20px auto;
+            display: block;
+        }
+    </style>
+    <script>
+        function loadEmployees() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "employees.xml", true);
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var xmlDoc = xhr.responseXML;
+
+                    // Hiển thị các title trong dropdown
+                    var employees = xmlDoc.getElementsByTagName("employee");
+                    var titleSet = new Set();
+
+                    for (let i = 0; i < employees.length; i++) {
+                        const title = employees[i].getAttribute("title");
+                        titleSet.add(title);
+                    }
+
+                    const select = document.getElementById("titleSelect");
+                    titleSet.forEach(title => {
+                        const option = document.createElement("option");
+                        option.value = title;
+                        option.textContent = title;
+                        select.appendChild(option);
+                    });
+
+                    // Xử lý sự kiện khi chọn title trong dropdown
+                    document.getElementById("titleSelect").addEventListener("change", function () {
+                        const selectedTitle = this.value;
+                        displayEmployeesByTitle(xmlDoc, selectedTitle);
+                    });
+                }
+            };
+        }
+
+        function displayEmployeesByTitle(xmlDoc, selectedTitle) {
+            const employees = xmlDoc.getElementsByTagName("employee");
+            const tbody = document.querySelector("#employeeTable tbody");
+            tbody.innerHTML = ""; // Xóa dữ liệu cũ
+
+            let hasData = false;
+            for (let i = 0; i < employees.length; i++) {
+                const title = employees[i].getAttribute("title");
+                if (title === selectedTitle) {
+                    const id = employees[i].getAttribute("id");
+                    const name = employees[i].getElementsByTagName("name")[0].textContent;
+                    const phone = employees[i].getElementsByTagName("phone")[0].textContent;
+
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${id}</td>
+                        <td>${name}</td>
+                        <td>${phone}</td>
+                    `;
+                    tbody.appendChild(row);
+                    hasData = true;
+                }
+            }
+
+            // Hiển thị bảng nếu có dữ liệu
+            document.getElementById("employeeTable").style.display = hasData ? "table" : "none";
+        }
+
+        // Nạp dữ liệu khi trang được tải
+        window.onload = function () {
+            loadEmployees();
+        };
+    </script>
+</head>
+<body>
+    <h1 style="text-align: center;">Employee Management</h1>
+    <label for="titleSelect" style="text-align: center; display: block;">Chọn Title:</label>
+    <select id="titleSelect">
+        <option value="">-- Chọn Title --</option>
+    </select>
+
+    <table id="employeeTable" style="display: none;">
+        <thead>
+            <tr>
+                <th>Mã Employee</th>
+                <th>Tên Employee</th>
+                <th>Phone Employee</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</body>
+</html>
